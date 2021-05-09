@@ -1,6 +1,7 @@
 .dark-background {
   background-color: rgb(1, 1, 26);
   color: white;
+  transition: 350ms;
 }
 
 .dark-title {

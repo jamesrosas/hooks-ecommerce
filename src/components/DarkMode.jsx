@@ -6,15 +6,16 @@ function DarkMode() {
 
     const handleClick = () =>{
         setMode(!mode)
+        const container = document.querySelector('.master-container');
+        container.classList.toggle('dark-background')
     }
 
-    const container = document.querySelector('.mode-container');
-    if (mode === true){
-        container.classList.add('dark-background')
-    }
-    if (mode === false){
-        container.classList.remove('dark-background')
-    }
+    // if (mode === true){
+    //     container.classList.add('dark-background')
+    // }
+    // if (mode === false){
+    //     container.classList.remove('dark-background')
+    // }
 
     return(
         <div className="mode-container">

@@ -1,13 +1,15 @@
 import './App.css';
 import DarkMode from './components/DarkMode'
+import Facts from './components/Facts';
 
 function App() {
   return (
-   <div>
+   <div className="master-container">
      <header>
        <h1>Tha E commerce</h1>
-       <DarkMode />
+       <DarkMode/>
      </header>
+       <Facts className="facts-container"/>
    </div>
   );
 }
