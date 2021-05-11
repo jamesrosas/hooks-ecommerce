@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Target from './Target';
 import './styles/Facts.css';
 
@@ -20,12 +20,10 @@ function Facts(props){
             {datos.map((person)=>{
                 return(
                     <Target image={person.image} name={person.name} planet={person.location.name}/>
-                )
-            }
+                )}
             )}
         </div>
-
-    )
+        )
 }
 
 export default Facts;

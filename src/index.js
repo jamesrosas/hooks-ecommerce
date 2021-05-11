@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import colorContext from './context/colorContext';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <colorContext.Provider value={{state: {
+  title: 'Tha E commerce',
+  nombre: 'James',
+  apellido: 'Rosas',
+  edad: 27,
+  color: 'cyan'
+}}}>
+      <App />
+    </colorContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -13,3 +13,6 @@ header {
 .master-container {
   transition: 350ms;
 }
+.facts-container {
+  transition: 350ms;
+}

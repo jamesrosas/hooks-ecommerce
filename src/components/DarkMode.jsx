@@ -6,21 +6,14 @@ function DarkMode() {
 
     const handleClick = () =>{
         setMode(!mode)
-        const container = document.querySelector('.master-container');
+        const container = document.querySelector('.facts-container');
         container.classList.toggle('dark-background')
     }
-
-    // if (mode === true){
-    //     container.classList.add('dark-background')
-    // }
-    // if (mode === false){
-    //     container.classList.remove('dark-background')
-    // }
 
     return(
         <div className="mode-container">
             <p>Change Mode</p>
-            <button onClick={handleClick}>{mode ? 'Ligth Mode': 'Dark Mode'}</button>
+            <button onClick={handleClick}>{mode ? 'Light Mode ClassList': 'Dark Mode ClassList'}</button>
         </div>
     )
 }
