@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useMemo } from 'react';
 import Target from './Target';
 import './styles/Facts.css';
 
@@ -23,6 +23,7 @@ const favoriteReducer = (state, action) => {
 function Facts(props) {
     const [datos, setData] = useState([]);
     const [myState, dispatch] = useReducer(favoriteReducer, initialState)
+    const [searchState, setSearchState] = useState('')
 
     const getData = async () => {
         const respuesta = await fetch('https://rickandmortyapi.com/api/character');
@@ -42,9 +43,24 @@ function Facts(props) {
         })
     }
 
+    const filteredPersons = useMemo(() => datos.filter((data) =>{
+        return data.name.toLowerCase().includes(searchState.toLowerCase())
+    })
+    , [datos, searchState]);
+   
+
+    const handleChange = (event)=>{
+        setSearchState(event.target.value)
+    }
+
+
 
     return (
         <React.Fragment>
+            <div className="search-container">
+                <p>Busca un personaje</p>
+                <input className="search-input" type="text" value={searchState} onChange={handleChange} />
+            </div>
             <div className="favorites-container">
                 <h3>Favorites</h3><br />
                 {myState.favorites.map(favorite => (
@@ -55,7 +71,7 @@ function Facts(props) {
                 ))}
             </div>
             <div className={props.className}>
-                {datos.map((person) => {
+                {filteredPersons.map((person) => {
                     return (
                         <div key={person.id}>
                             <Target image={person.image} name={person.name} planet={person.location.name} />
@@ -64,6 +80,12 @@ function Facts(props) {
                     )
                 }
                 )}
+                {filteredPersons.length === 0 && (
+                    <div className="no-results_container">
+                        <p className="no-results_title">OOps! parece que el personaje que buscas no existe</p>
+                    </div>
+                )                 
+                }
             </div>
 
         </React.Fragment>
