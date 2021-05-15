@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useMemo } from 'react';
+import React, { useState, useEffect, useReducer, useMemo, useRef } from 'react';
 import Target from './Target';
 import './styles/Facts.css';
 
@@ -24,6 +24,7 @@ function Facts(props) {
     const [datos, setData] = useState([]);
     const [myState, dispatch] = useReducer(favoriteReducer, initialState)
     const [searchState, setSearchState] = useState('')
+    const inputRef = useRef(null)
 
     const getData = async () => {
         const respuesta = await fetch('https://rickandmortyapi.com/api/character');
@@ -49,9 +50,12 @@ function Facts(props) {
     , [datos, searchState]);
    
 
-    const handleChange = (event)=>{
-        setSearchState(event.target.value)
+    const handleChange = ()=>{
+        setSearchState(inputRef.current.value)
     }
+    // const handleChange = (event) => {
+    //     setSearchState(event.target.value)  usar event.target no es tan exacto como useRef con el cual podemos especdificar directamente a que elemento no estamos refiriendo para aplicarle el hanldeChange, es como si utilizaramos un document.getElementById() para referenciar el input
+    // } 
 
 
 
@@ -59,7 +63,7 @@ function Facts(props) {
         <React.Fragment>
             <div className="search-container">
                 <p>Busca un personaje</p>
-                <input className="search-input" type="text" value={searchState} onChange={handleChange} />
+                <input className="search-input" type="text" value={searchState} ref={inputRef} onChange={handleChange} />
             </div>
             <div className="favorites-container">
                 <h3>Favorites</h3><br />
