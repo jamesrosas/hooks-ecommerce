@@ -14,7 +14,7 @@ ReactDOM.render(
   nombre: 'James',
   apellido: 'Rosas',
   edad: 27,
-  color: 'cyan'
+  color: 'darkmagenta'
 }}}>
       <App />
     </colorContext.Provider>

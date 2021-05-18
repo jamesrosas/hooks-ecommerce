@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer, useMemo, useRef } from 'react';
 import Target from './Target';
 import './styles/Facts.css';
+import useCallApi from '../custom_hooks/useCallApi'
 
 const initialState = {
     favorites: []
@@ -21,20 +22,23 @@ const favoriteReducer = (state, action) => {
 
 
 function Facts(props) {
-    const [datos, setData] = useState([]);
+    // const [datos, setData] = useState([]); **Este estado en especfico ya esta dentro de la ligica del custom hook de useCallApi()
     const [myState, dispatch] = useReducer(favoriteReducer, initialState)
     const [searchState, setSearchState] = useState('')
     const inputRef = useRef(null)
 
-    const getData = async () => {
-        const respuesta = await fetch('https://rickandmortyapi.com/api/character');
-        const data = await respuesta.json();
+    const datos = useCallApi('https://rickandmortyapi.com/api/character')
+//************************************************************************************** */
+    // const getData = async () => {
+    //     const respuesta = await fetch('https://rickandmortyapi.com/api/character');
+    //     const data = await respuesta.json();
 
-        setData(data.results);
-    };
-    useEffect(() => {
-        getData();
-    }, []);
+    //     setData(data.results);
+    // };
+    // useEffect(() => {
+    //     getData();
+    // }, []);  ****TODO ESTO LO REEMPLAZE CON EL CUSTOM HOOK DE useCallApi()*****
+// *************************************************************************************
 
     const handleClick = (favorite)=> {
         dispatch({
